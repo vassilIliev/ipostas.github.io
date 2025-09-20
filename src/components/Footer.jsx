@@ -1,3 +1,4 @@
+import { getImageUrl } from '../utils/imageUtils'
 import './Footer.css'
 
 function Footer() {
@@ -9,7 +10,7 @@ function Footer() {
         <div className="footer-content">
           <div className="footer-info">
             <img 
-              src="/images/projects/logos/Asset 2-8.png" 
+              src={getImageUrl("/images/projects/logos/Asset 2-8.png")} 
               alt="ИПОСТАС Logo" 
               className="footer-logo"
               onError={(e) => {

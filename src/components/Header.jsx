@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { getImageUrl } from '../utils/imageUtils'
 import './Header.css'
 
 function Header() {
@@ -70,7 +71,7 @@ function Header() {
           <Link to="/" className="logo" onClick={closeMenu}>
             <div className="logo-container">
               <img 
-                src="/images/projects/logos/Asset 2-8.png" 
+                src={getImageUrl("/images/projects/logos/Asset 2-8.png")} 
                 alt="ИПОСТАС Logo" 
                 className="logo-image"
                 onError={(e) => {

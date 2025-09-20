@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import ProjectDetail from './pages/ProjectDetail'
+import { getImageUrl } from './utils/imageUtils'
 import './App.css'
 
 // Scroll to top component
@@ -50,7 +51,7 @@ function App() {
         <div className="loading-container">
           <div className="loading-spinner"></div>
           <img 
-            src="/images/projects/logos/Asset 2-8.png" 
+            src={getImageUrl("/images/projects/logos/Asset 2-8.png")} 
             alt="ИПОСТАС Logo" 
             className="loading-logo"
             onError={(e) => {
