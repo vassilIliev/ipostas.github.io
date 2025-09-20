@@ -81,7 +81,18 @@ function ProjectDetail() {
               src={project.poster}
               alt={project.title}
               onError={(e) => {
-                e.target.src = `https://via.placeholder.com/400x600/1a1a1a/d4a574?text=${encodeURIComponent(project.title)}`
+                // Prevent infinite loop by checking if fallback was already tried
+                if (!e.target.dataset.fallback) {
+                  e.target.dataset.fallback = 'true'
+                  e.target.src = 'data:image/svg+xml;base64,' + btoa(`
+                    <svg width="400" height="600" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="400" height="600" fill="#1a1a1a"/>
+                      <text x="200" y="300" font-family="Arial" font-size="16" fill="#d4a574" text-anchor="middle" dominant-baseline="middle">
+                        ${project.title}
+                      </text>
+                    </svg>
+                  `)
+                }
               }}
             />
           </div>
@@ -224,7 +235,18 @@ function ProjectDetail() {
                   src={image}
                   alt={`${project.title} - кадър ${index + 1}`}
                   onError={(e) => {
-                    e.target.src = `https://via.placeholder.com/300x200/1a1a1a/d4a574?text=${encodeURIComponent(project.title)}`
+                    // Prevent infinite loop by checking if fallback was already tried
+                    if (!e.target.dataset.fallback) {
+                      e.target.dataset.fallback = 'true'
+                      e.target.src = 'data:image/svg+xml;base64,' + btoa(`
+                        <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+                          <rect width="300" height="200" fill="#1a1a1a"/>
+                          <text x="150" y="100" font-family="Arial" font-size="16" fill="#d4a574" text-anchor="middle" dominant-baseline="middle">
+                            ${project.title}
+                          </text>
+                        </svg>
+                      `)
+                    }
                   }}
                 />
                 <div className="gallery-overlay">
@@ -262,7 +284,18 @@ function ProjectDetail() {
               src={project.images[currentImageIndex]}
               alt={`${project.title} - кадър ${currentImageIndex + 1}`}
               onError={(e) => {
-                e.target.src = `https://via.placeholder.com/800x600/1a1a1a/d4a574?text=${encodeURIComponent(project.title)}`
+                // Prevent infinite loop by checking if fallback was already tried
+                if (!e.target.dataset.fallback) {
+                  e.target.dataset.fallback = 'true'
+                  e.target.src = 'data:image/svg+xml;base64,' + btoa(`
+                    <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="800" height="600" fill="#1a1a1a"/>
+                      <text x="400" y="300" font-family="Arial" font-size="16" fill="#d4a574" text-anchor="middle" dominant-baseline="middle">
+                        ${project.title}
+                      </text>
+                    </svg>
+                  `)
+                }
               }}
             />
             

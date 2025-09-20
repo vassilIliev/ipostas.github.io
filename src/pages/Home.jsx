@@ -86,7 +86,18 @@ function ProjectCarousel() {
                 src={image.src}
                 alt={image.alt}
                 onError={(e) => {
-                  e.target.src = `https://via.placeholder.com/400x300/1a1a1a/d4a574?text=${encodeURIComponent(image.project)}`
+                  // Prevent infinite loop by checking if fallback was already tried
+                  if (!e.target.dataset.fallback) {
+                    e.target.dataset.fallback = 'true'
+                    e.target.src = 'data:image/svg+xml;base64,' + btoa(`
+                      <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="300" fill="#1a1a1a"/>
+                        <text x="200" y="150" font-family="Arial" font-size="16" fill="#d4a574" text-anchor="middle" dominant-baseline="middle">
+                          ${image.project}
+                        </text>
+                      </svg>
+                    `)
+                  }
                 }}
               />
               <div className="image-overlay">

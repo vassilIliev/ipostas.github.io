@@ -22,7 +22,18 @@ function Projects() {
                   src={project.poster}
                   alt={project.title}
                   onError={(e) => {
-                    e.target.src = `https://via.placeholder.com/300x450/1a1a1a/d4a574?text=${encodeURIComponent(project.title)}`
+                    // Prevent infinite loop by checking if fallback was already tried
+                    if (!e.target.dataset.fallback) {
+                      e.target.dataset.fallback = 'true'
+                      e.target.src = 'data:image/svg+xml;base64,' + btoa(`
+                        <svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+                          <rect width="300" height="450" fill="#1a1a1a"/>
+                          <text x="150" y="225" font-family="Arial" font-size="16" fill="#d4a574" text-anchor="middle" dominant-baseline="middle">
+                            ${project.title}
+                          </text>
+                        </svg>
+                      `)
+                    }
                   }}
                 />
               </div>
