@@ -570,3 +570,40 @@
     padding: 4px 12px;
   }
 }
+
+/* Mobile - Disable click interactions and hover effects */
+.mobile-no-click {
+  cursor: default !important;
+}
+
+.mobile-no-click:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.mobile-no-click:hover img {
+  transform: none !important;
+}
+
+.mobile-no-click .gallery-overlay {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .gallery-item {
+    cursor: default;
+  }
+  
+  .gallery-item:hover {
+    transform: none;
+    box-shadow: var(--shadow-light);
+  }
+  
+  .gallery-item:hover img {
+    transform: none;
+  }
+  
+  .gallery-overlay {
+    display: none;
+  }
+}

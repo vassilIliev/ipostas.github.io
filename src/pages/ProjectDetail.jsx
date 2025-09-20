@@ -2,12 +2,14 @@ import { useState, useEffect, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { projects } from '../data/projects'
 import { getImageUrl } from '../utils/imageUtils'
+import { useIsMobile } from '../hooks/useIsMobile'
 import './ProjectDetail.css'
 
 function ProjectDetail() {
   const { projectId } = useParams()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+  const isMobile = useIsMobile()
 
   // Hooks must be called first, before any early returns
   const handleKeyDown = useCallback((e) => {
@@ -229,8 +231,8 @@ function ProjectDetail() {
             {project.images.map((image, index) => (
               <div
                 key={index}
-                className="gallery-item"
-                onClick={() => openLightbox(index)}
+                className={`gallery-item ${isMobile ? 'mobile-no-click' : ''}`}
+                onClick={isMobile ? undefined : () => openLightbox(index)}
               >
                 <img
                   src={getImageUrl(image)}
@@ -266,7 +268,7 @@ function ProjectDetail() {
       </div>
 
       {/* Lightbox */}
-      {isLightboxOpen && (
+      {isLightboxOpen && !isMobile && (
         <div className="lightbox" onClick={closeLightbox}>
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             <button className="lightbox-close" onClick={closeLightbox}>
