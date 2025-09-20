@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects'
+import { getImageUrl } from '../utils/imageUtils'
 import './Projects.css'
 
 function Projects() {
@@ -19,7 +20,7 @@ function Projects() {
             <Link to={`/projects/${project.id}`} key={project.id} className="project-card">
               <div className="project-poster">
                 <img
-                  src={project.poster}
+                  src={getImageUrl(project.poster)}
                   alt={project.title}
                   onError={(e) => {
                     // Prevent infinite loop by checking if fallback was already tried

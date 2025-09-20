@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { projects } from '../data/projects'
+import { getImageUrl } from '../utils/imageUtils'
 import './ProjectDetail.css'
 
 function ProjectDetail() {
@@ -78,7 +79,7 @@ function ProjectDetail() {
         <div className="project-header">
           <div className="project-poster">
             <img
-              src={project.poster}
+              src={getImageUrl(project.poster)}
               alt={project.title}
               onError={(e) => {
                 // Prevent infinite loop by checking if fallback was already tried
@@ -232,7 +233,7 @@ function ProjectDetail() {
                 onClick={() => openLightbox(index)}
               >
                 <img
-                  src={image}
+                  src={getImageUrl(image)}
                   alt={`${project.title} - кадър ${index + 1}`}
                   onError={(e) => {
                     // Prevent infinite loop by checking if fallback was already tried
@@ -281,7 +282,7 @@ function ProjectDetail() {
             </button>
             
             <img
-              src={project.images[currentImageIndex]}
+              src={getImageUrl(project.images[currentImageIndex])}
               alt={`${project.title} - кадър ${currentImageIndex + 1}`}
               onError={(e) => {
                 // Prevent infinite loop by checking if fallback was already tried

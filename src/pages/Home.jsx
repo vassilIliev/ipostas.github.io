@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { getImageUrl } from '../utils/imageUtils'
 import './Home.css'
 
 // Project Carousel Component
@@ -10,32 +11,32 @@ function ProjectCarousel() {
   // Selection of images from different projects
   const galleryImages = [
     {
-      src: '/images/projects/morphine/Морфин 19-0539.jpg',
+      src: getImageUrl('/images/projects/morphine/Морфин 19-0539.jpg'),
       project: 'Морфин',
       alt: 'Кадър от Морфин'
     },
     {
-      src: '/images/projects/invasion/SPAM-5547.jpg',
+      src: getImageUrl('/images/projects/invasion/SPAM-5547.jpg'),
       project: 'Нахлуване',
       alt: 'Кадър от Нахлуване'
     },
     {
-      src: '/images/projects/sweet-death/TEA09042.jpg',
+      src: getImageUrl('/images/projects/sweet-death/TEA09042.jpg'),
       project: 'Сладка смърт',
       alt: 'Кадър от Сладка смърт'
     },
     {
-      src: '/images/projects/morphine/Морфин 27-0608.jpg',
+      src: getImageUrl('/images/projects/morphine/Морфин 27-0608.jpg'),
       project: 'Морфин',
       alt: 'Кадър от Морфин'
     },
     {
-      src: '/images/projects/sunny-line/10 (1 of 1).jpg',
+      src: getImageUrl('/images/projects/sunny-line/10 (1 of 1).jpg'),
       project: 'Слънчева линия',
       alt: 'Кадър от Слънчева линия'
     },
     {
-      src: '/images/projects/invasion/SPAM-5573.jpg',
+      src: getImageUrl('/images/projects/invasion/SPAM-5573.jpg'),
       project: 'Нахлуване',
       alt: 'Кадър от Нахлуване'
     }
