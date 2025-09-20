@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { getImageUrl } from '../utils/imageUtils'
 import './Header.css'
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -23,13 +24,20 @@ function Header() {
     e.preventDefault()
     closeMenu()
     
-    // If not on home page, navigate to home first
-    if (location.pathname !== '/') {
-      window.location.href = '/#about'
+    // Check if we're on the home page
+    const isOnHomePage = location.pathname === '/'
+    
+    if (!isOnHomePage) {
+      // Navigate to home page first, then scroll will be handled by useEffect
+      navigate('/', { state: { scrollToAbout: true } })
       return
     }
     
-    // Scroll to about section with offset for fixed header
+    // If already on home page, scroll to about section
+    scrollToAboutSection()
+  }
+  
+  const scrollToAboutSection = () => {
     setTimeout(() => {
       const aboutSection = document.getElementById('about')
       if (aboutSection) {
@@ -45,24 +53,20 @@ function Header() {
     }, 100)
   }
 
-  // Handle hash navigation when page loads
+  // Handle navigation from other pages to about section
   useEffect(() => {
+    // Handle hash navigation when page loads
     if (location.hash === '#about') {
-      setTimeout(() => {
-        const aboutSection = document.getElementById('about')
-        if (aboutSection) {
-          const headerHeight = 80
-          const elementPosition = aboutSection.getBoundingClientRect().top
-          const offsetPosition = elementPosition + window.pageYOffset - headerHeight
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          })
-        }
-      }, 500) // Wait for page to fully load
+      scrollToAboutSection()
     }
-  }, [location.hash])
+    
+    // Handle navigation with state (when coming from other pages)
+    if (location.state?.scrollToAbout && location.pathname === '/') {
+      scrollToAboutSection()
+      // Clear the state to prevent scrolling on subsequent renders
+      navigate('/', { replace: true })
+    }
+  }, [location.hash, location.state, location.pathname, navigate])
 
   return (
     <header className="header">
